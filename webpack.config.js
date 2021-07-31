@@ -33,8 +33,15 @@ export default {
       },
       {
         test: /\.(png)$/i,
-        type: 'asset/resource',
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        }
       },
+      
     ],
+  },
+  output: {
+    clean: true,
   },
 };
