@@ -1,4 +1,8 @@
 import '../css/index.css';
+import '../assets/video.png';
+import '../assets/scale_1200.png';
+import '../assets/finish.png';
+
 import React, { useEffect, useState } from 'react';
 // helper functions
 const maxPhoneNumberLength = 10;
