@@ -7,6 +7,13 @@
 
 @font-face {
   font-family: "Roboto";
+  src: url("../assets/roboto/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
   src: url("../assets/roboto/Roboto-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: bold;
@@ -18,6 +25,8 @@
 
   margin: 0;
   padding: 0;
+
+  box-sizing: border-box;
 }
 
 .container {
@@ -64,3 +73,131 @@
   text-align: center;
 }
 
+.fs-14 {
+  font-size: 14px;
+}
+
+.dialNumber {
+  font-size: 16px;
+  font-weight: 500;
+
+  width: 88px;
+  height: 52px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid #000000;
+}
+
+.dialNumber:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.mt-33 {
+  margin-top: 33px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.dialNumber.dialReset {
+  width: 186px;
+}
+
+.dialNumber.check {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  left: 10px;
+
+  user-select: none;
+}
+
+.mt-39 {
+  margin-top: 39px;
+}
+
+.mt-33 {
+  margin-top: 33px;
+}
+
+.ms-48 {
+  margin-left: 48px;
+}
+
+.h-52 {
+  height: 52px;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.gap-30 {
+  gap: 30px;
+}
+
+.agreement {
+  font-size: 14px;
+  color: #565656;
+}
+
+.submit {
+  font-size: 16px;
+  font-weight: 500;
+
+  width: 284px;
+  height: 52px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 13px;
+  margin-left: 48px;
+}
+
+.submit:hover {
+  cursor: initial;
+}
+
+.submit.fail {
+  color: #4E4E4E;
+  border: 2px solid #4E4E4E;
+  background-color: transparent;
+}
+
+.submit.success {
+  color: #FFFFFF;
+  border: 2px solid black;
+  background-color: black;
+}
+
+.submit.success:hover {
+  color: black;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.color-red {
+  color: red;
+}
