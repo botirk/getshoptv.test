@@ -2,6 +2,7 @@ import '../css/index.css';
 import '../assets/video.png';
 import '../assets/scale_1200.png';
 import '../assets/finish.png';
+import '../assets/qr.png';
 
 import React, { useEffect, useState } from 'react';
 // helper functions
@@ -121,11 +122,22 @@ const Menu = ({ finish }) => {
   </div>
 }
 
+const Close = () => <button class="dialNumber closeButton">✖</button>;
+
+const QrBlock = () => <div className="qrBlock row align-items-center gap-10">
+    <p className="qrText">СКАНИРУЙТЕ QR-КОД ДЛЯ ПОЛУЧЕНИЯ ДОПОЛНИТЕЛЬНОЙ ИНФОРМАЦИИ</p>
+    <img src="qr.png" alt="Сканируйте наш QR код" />
+  </div>
+
 const Router = () => {
   const [state, setState] = useState('video'); // video > phoneNumber > finish
 
   if (state === 'video') return <Container src='video.png' onClick={() => setState('phoneNumber')} />;
-  else if (state === 'phoneNumber') return <Container><Menu finish={() => setState('finish')}/></Container>;
+  else if (state === 'phoneNumber') return <Container>
+    <Menu finish={() => setState('finish')}/>
+    <Close />
+    <QrBlock />
+  </Container>;
   else return <Container src='finish.png' />;
 }
 

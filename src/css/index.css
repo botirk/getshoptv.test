@@ -201,3 +201,40 @@
 .color-red {
   color: red;
 }
+
+.dialNumber.closeButton {
+  position: absolute;
+  left: 1172px;
+  top: 15px;
+
+  font-size: 1.75em;
+
+  background-color: white;
+  color: black;
+  border: none;
+}
+
+.dialNumber.closeButton:hover {
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.qrBlock {
+  position: absolute;
+  left: 926px;
+  top: 580px;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.qrText {
+  width: 194px;
+  height: 76px;
+
+  text-align: end;
+
+  color: white;
+}
