@@ -2,9 +2,9 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
   mode: process.env.NODE_ENV || 'development',
-  /*entry: {
+  /* entry: {
     main: './src/index.js',
-  },*/
+  }, */
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
@@ -36,9 +36,9 @@ export default {
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',
-        }
+        },
       },
-      
+
     ],
   },
   output: {

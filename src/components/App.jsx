@@ -44,10 +44,10 @@ const Dial = ({ addNumber, reset, backspace }) => {
     const callback = (e) => {
       //console.log(e, /^[0-9]$/.test(e.key));
       const key = e.key;
-      if (/^[0-9]$/.test(key))
-        addNumber(key)();
       if (key === 'Backspace')
         backspace();
+      else if (/^[0-9]$/.test(key))
+        addNumber(key)();
     };
     document.addEventListener('keydown', callback);
 
@@ -81,7 +81,7 @@ const Agreement = ({isPhoneValid, isChecked, setChecked}) => {
   // ✔
   if (isPhoneValid === false)
     return <div className="row mt-33 ms-48 h-52 gap-30 align-items-center">
-      <p className="text-center">НЕВЕРНО ВВЕДЁН НОМЕР</p>
+      <p className="text-center color-red">НЕВЕРНО ВВЕДЁН НОМЕР</p>
     </div>;
 
   return <div className="row mt-33 ms-48 h-52 gap-30 align-items-center">

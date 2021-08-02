@@ -17,6 +17,10 @@ module.exports = {
   plugins: [
     'react',
   ],
+  ignorePatterns: [
+    'node_modules',
+    'dist'
+  ],
   rules: {
     'import/extensions': 'off'
   },
