@@ -14,6 +14,11 @@ const addNumberToPhoneNumber = (setPhoneNumber, phoneNumber) => (toAdd) => () =>
 }
 
 const resetPhoneNumber = (setPhoneNumber) => () => setPhoneNumber('');
+
+const backspace = (setPhoneNumber, phoneNumber) => () => {
+  if (phoneNumber.length > 0)
+    setPhoneNumber(phoneNumber.slice(0, -1));
+}
 // functional components
 const Container = ({ children, src="scale_1200.png", onClick=undefined }) => {
   return <div className="container">
@@ -31,10 +36,24 @@ const Phone = ({ phone }) => {
 }
 
 const DialNumber = ({ number, addNumber }) => {
-  return <div className="dialNumber" onClick={addNumber(number)}>{number}</div>;
+  return <button className="dialNumber" onClick={addNumber(number)}>{number}</button>;
 }
 
-const Dial = ({ addNumber, reset }) => {
+const Dial = ({ addNumber, reset, backspace }) => {
+  useEffect(() => {
+    const callback = (e) => {
+      //console.log(e, /^[0-9]$/.test(e.key));
+      const key = e.key;
+      if (/^[0-9]$/.test(key))
+        addNumber(key)();
+      if (key === 'Backspace')
+        backspace();
+    };
+    document.addEventListener('keydown', callback);
+
+    return () => document.removeEventListener('keydown', callback);
+  });
+
   return <div className="mt-33">
     <div className="row justify-content-center gap-10">
       <DialNumber number={1} addNumber={addNumber}/>
@@ -52,7 +71,7 @@ const Dial = ({ addNumber, reset }) => {
       <DialNumber number={9} addNumber={addNumber}/>
     </div>
     <div className="row justify-content-center gap-10 mt-10">
-      <div className="dialNumber dialReset" onClick={reset}>СТЕРЕТЬ</div>
+      <button className="dialNumber dialReset" onClick={reset}>СТЕРЕТЬ</button>
       <DialNumber number={0} addNumber={addNumber}/>
     </div>
   </div>;
@@ -117,12 +136,16 @@ const Menu = ({ finish }) => {
       и с Вами свяжется наш менеждер для<br />
       дальнейшей консультации
     </p>
-    <Dial addNumber={addNumberToPhoneNumber(setPhoneNumber, phoneNumber)} reset={resetPhoneNumber(setPhoneNumber)} />
+    <Dial 
+      addNumber={addNumberToPhoneNumber(setPhoneNumber, phoneNumber)} 
+      reset={resetPhoneNumber(setPhoneNumber)}
+      backspace={backspace(setPhoneNumber, phoneNumber)}
+    />
     <Interaction state={state} finish={finish}/>
   </div>
 }
 
-const Close = () => <button class="dialNumber closeButton">✖</button>;
+const Close = () => <button className="dialNumber closeButton">✖</button>;
 
 const QrBlock = () => <div className="qrBlock row align-items-center gap-10">
     <p className="qrText">СКАНИРУЙТЕ QR-КОД ДЛЯ ПОЛУЧЕНИЯ ДОПОЛНИТЕЛЬНОЙ ИНФОРМАЦИИ</p>
