@@ -2,9 +2,9 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
   mode: process.env.NODE_ENV || 'development',
-  /* entry: {
-    main: './src/index.js',
-  }, */
+  entry: {
+    main: './src/index.jsx',
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',

@@ -3,7 +3,7 @@
   "name": "getshoptv.test",
   "version": "1.0.0",
   "description": "job test",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "npx webpack serve",
     "chmod": "sudo chmod -R 775 .",
