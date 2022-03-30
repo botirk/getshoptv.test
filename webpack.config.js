@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 export default {
   mode: process.env.NODE_ENV || 'development',
   entry: {
-    main: './src/index.jsx',
+    main: './src/index.tsx',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -27,6 +27,10 @@ export default {
           },
         },
       },
+      { 
+        test: /\.tsx?$/i,
+        loader: 'ts-loader'
+      },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
@@ -40,6 +44,9 @@ export default {
       },
 
     ],
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
   },
   output: {
     clean: true,

@@ -2,15 +2,24 @@ import '../css/index.css';
 import '../assets/qr.png';
 
 import React, { useEffect, useState } from 'react';
-import { MAX_PHONE_NUMBER_LENGTH, addNumberToPhoneNumber, removeNumberFromPhoneNumber } from '../logic/helpers.js'
+import { MAX_PHONE_NUMBER_LENGTH, addNumberToPhoneNumber, removeNumberFromPhoneNumber } from '../logic/helpers'
 
-const DialNumber = ({ number, addNumber }) => {
+interface DialNumberInterface {
+  number: string; 
+  addNumber: (number: string) => void;
+}
+const DialNumber = ({ number, addNumber }: DialNumberInterface) => {
   return <button className="dialNumber" onClick={() => addNumber(number)}>{number}</button>;
 }
 
-const Dial = ({ addNumber, reset, backspace }) => {
+interface DialInterface {
+  addNumber: (number: string) => void;
+  reset: () => void;
+  backspace: () => void;
+}
+const Dial = ({ addNumber, reset, backspace }: DialInterface) => {
   useEffect(() => {
-    const callback = (e) => {
+    const callback = (e: KeyboardEvent) => {
       //console.log(e, /^[0-9]$/.test(e.key));
       const key = e.key;
       if (key === 'Backspace') backspace();
@@ -43,7 +52,11 @@ const Dial = ({ addNumber, reset, backspace }) => {
   </div>;
 }
 
-const Interaction = ({ state, finish }) => {
+interface InteractionInterface {
+  state: MenuState;
+  finish: () => void;
+}
+const Interaction = ({ state, finish }: InteractionInterface) => {
   const [isChecked, setChecked] = useState(false);
   const isPhoneValid = (state !== 'invalid');
   const isSubmitDisabled = (state !== 'valid' || isChecked === false);
@@ -69,7 +82,10 @@ const Interaction = ({ state, finish }) => {
   </>;
 }
 
-const Phone = ({ phone }) => {
+interface PhoneInterface {
+  phone: string;
+}
+const Phone = ({ phone }: PhoneInterface) => {
   while (phone.length < MAX_PHONE_NUMBER_LENGTH) phone += '_';
   const converted = `(${phone[0]}${phone[1]}${phone[2]})
     ${phone[3]}${phone[4]}${phone[5]}-${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`;
@@ -77,9 +93,13 @@ const Phone = ({ phone }) => {
   return <p className="mt-13 fs-32 text-center"><b>+7{converted}</b></p>;
 }
 
-const Menu = ({ onFinish }) => {
+type MenuState = 'short' | 'loading' | 'invalid' | 'valid';
+interface MenuInterface {
+  onFinish: (phoneNumber: string) => void;
+}
+const Menu = ({ onFinish }: MenuInterface) => {
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [state, setState] = useState('short'); // short, loading, invalid, valid
+  const [state, setState] = useState<MenuState>('short');
 
   useEffect(() => {
     // loading means business
@@ -109,11 +129,14 @@ const Menu = ({ onFinish }) => {
       reset={() => setPhoneNumber('')}
       backspace={() => setPhoneNumber(removeNumberFromPhoneNumber(phoneNumber))}
     />
-    <Interaction state={state} finish={onFinish}/>
+    <Interaction state={state} finish={() => onFinish(phoneNumber)}/>
   </div>;
 }
 
-const PhoneNumberView = ({ onFinish }) => {
+interface PhoneNumberViewInterface {
+  onFinish: (phoneNumber: string) => void; 
+}
+const PhoneNumberView = ({ onFinish }: PhoneNumberViewInterface) => {
   return <>
     <Menu onFinish={onFinish}/>
     {/* close button */}

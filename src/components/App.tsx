@@ -4,9 +4,14 @@ import '../assets/scale_1200.png';
 import '../assets/finish.png';
 
 import React, { useState } from 'react';
-import PhoneNumberView from './PhoneNumberView.jsx';
+import PhoneNumberView from './PhoneNumberView';
 
-const Container = ({ children, src, onClick }) => {
+interface ContainerInterface {
+  src: string; 
+  children?: React.ReactNode;
+  onClick?: () => void;
+}
+const Container = ({ children, src, onClick }: ContainerInterface) => {
   return <div className="container">
     <img onClick={onClick} className="containerImg" src={src} alt="ребёнок с собакой в руках"/>
     {children}
