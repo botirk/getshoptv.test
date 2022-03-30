@@ -27,9 +27,9 @@ export default {
           },
         },
       },
-      { 
+      {
         test: /\.tsx?$/i,
-        loader: 'ts-loader'
+        loader: 'ts-loader',
       },
       {
         test: /\.css$/i,

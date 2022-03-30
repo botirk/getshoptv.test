@@ -3,32 +3,38 @@ import '../assets/video.png';
 import '../assets/scale_1200.png';
 import '../assets/finish.png';
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PhoneNumberView from './PhoneNumberView';
 
 interface ContainerInterface {
-  src: string; 
+  src: string;
   children?: React.ReactNode;
   onClick?: () => void;
 }
-const Container = ({ children, src, onClick }: ContainerInterface) => {
+const Container = ({children, src, onClick}: ContainerInterface) => {
   return <div className="container">
-    <img onClick={onClick} className="containerImg" src={src} alt="ребёнок с собакой в руках"/>
+    <img
+      onClick={onClick} className="containerImg"
+      src={src} alt="ребёнок с собакой в руках"
+    />
     {children}
   </div>;
-}
+};
 
 const App = () => {
   const [state, setState] = useState('video'); // video > phoneNumber > finish
 
-  if (state === 'video') 
-    return <Container src='video.png' onClick={() => setState('phoneNumber')} />;
-  else if (state === 'phoneNumber') 
+  if (state === 'video') {
+    return <Container
+      src='video.png' onClick={() => setState('phoneNumber')}
+    />;
+  } else if (state === 'phoneNumber') {
     return <Container src='scale_1200.png'>
       <PhoneNumberView onFinish={() => setState('finish')}/>
     </Container>;
-  else 
+  } else {
     return <Container src='finish.png' />;
-}
+  }
+};
 
 export default App;
